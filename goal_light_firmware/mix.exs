@@ -31,7 +31,7 @@ defmodule GoalLightFirmware.MixProject do
   def application do
     [
       mod: {GoalLightFirmware.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :inets]
     ]
   end
 
@@ -39,7 +39,7 @@ defmodule GoalLightFirmware.MixProject do
   defp deps do
     [
       # Dependencies for all targets
-      {:goal_light_ui, path: "../goal_light_ui"},
+      {:goal_light_ui, path: "../goal_light_ui", targets: @all_targets, env: Mix.env()},
       {:nerves, "~> 1.6.0", runtime: false},
       {:shoehorn, "~> 0.6"},
       {:ring_logger, "~> 0.6"},
