@@ -5,6 +5,9 @@
 # is restricted to this project.
 import Config
 
+import_config "../../goal_light_ui/config/config.exs"
+import_config "../../goal_light_ui/config/prod.exs"
+
 config :goal_light_firmware, target: Mix.target()
 
 # Customize non-Elixir parts of the firmware. See
