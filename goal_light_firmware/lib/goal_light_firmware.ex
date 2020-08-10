@@ -1,18 +1,19 @@
 defmodule GoalLightFirmware do
-  @moduledoc """
-  Documentation for GoalLightFirmware.
-  """
+  alias GoalLightFirmware.Audio
+  alias GoalLightFirmware.GoalLight
 
-  @doc """
-  Hello world.
+  def intro do
+    Audio.intro()
+    GoalLight.intro()
+  end
 
-  ## Examples
+  def goal do
+    Audio.goal()
+    GoalLight.goal()
+  end
 
-      iex> GoalLightFirmware.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def win do
+    Audio.win()
+    GoalLight.win()
   end
 end

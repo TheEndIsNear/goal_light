@@ -19,10 +19,10 @@ defmodule GoalLightFirmware.GoalLight do
   end
 
   @impl true
-  def handle_cast(:goal, %{gpio: gpio} = state) do
+  def handle_cast({:enable, timeout}, %{gpio: gpio} = state) do
     Logger.info("Enabling the relay")
     GPIO.write(gpio, 1)
-    :timer.send_after(:timer.seconds(97), :goal_end)
+    :timer.send_after(:timer.seconds(timeout), :goal_end)
     {:noreply, state}
   end
 
@@ -34,6 +34,14 @@ defmodule GoalLightFirmware.GoalLight do
   end
 
   def goal do
-    GenServer.cast(__MODULE__, :goal)
+    GenServer.cast(__MODULE__, {:enable, 97})
+  end
+
+  def intro do
+    GenServer.cast(__MODULE__, {:enable, 52})
+  end
+
+  def win do
+    GenServer.cast(__MODULE__, {:enable, 92})
   end
 end
