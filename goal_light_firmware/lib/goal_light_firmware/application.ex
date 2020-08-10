@@ -15,6 +15,7 @@ defmodule GoalLightFirmware.Application do
         # Children for all targets
         # Starts a worker by calling: GoalLightFirmware.Worker.start_link(arg)
         # {GoalLightFirmware.Worker, arg},
+        GoalLightFirmware.GoalLight
       ] ++ children(target())
 
     Supervisor.start_link(children, opts)
