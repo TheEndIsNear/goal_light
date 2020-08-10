@@ -15,3 +15,6 @@
 
 # If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
+# dialyzer plt
+goal_light_firmware.plt
+goal_light_firmware.plt.hash

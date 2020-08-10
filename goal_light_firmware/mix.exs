@@ -7,6 +7,18 @@ defmodule GoalLightFirmware.MixProject do
 
   def project do
     [
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+      dialyzer: [
+        ignore_warnings: ".dialyzer_ignore.exs",
+        list_unused_filters: true,
+        plt_file: {:no_warn, "goal_light_firmware.plt"}
+      ],
       app: @app,
       version: @version,
       elixir: "~> 1.9",
@@ -38,6 +50,12 @@ defmodule GoalLightFirmware.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:git_hooks, "~> 0.5.0", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.13.1", only: :test},
+      {:credo, "~> 1.4.0", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 1.0.2", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.22.2", only: :dev, runtime: false},
       # Dependencies for all targets
       {:goal_light_ui, path: "../goal_light_ui", targets: @all_targets, env: Mix.env()},
       {:nerves, "~> 1.6.0", runtime: false},

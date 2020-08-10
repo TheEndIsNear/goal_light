@@ -3,6 +3,18 @@ defmodule GoalLightUi.MixProject do
 
   def project do
     [
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+      dialyzer: [
+        ignore_warnings: ".dialyzer_ignore.exs",
+        list_unused_filters: true,
+        plt_file: {:no_warn, "goal_light_ui.plt"}
+      ],
       app: :goal_light_ui,
       version: "0.1.0",
       elixir: "~> 1.7",
@@ -33,17 +45,23 @@ defmodule GoalLightUi.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.5.3"},
-      {:phoenix_live_view, "~> 0.13.0"},
-      {:floki, ">= 0.0.0", only: :test},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.2.0"},
-      {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:git_hooks, "~> 0.5.0", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.13.1", only: :test},
+      {:credo, "~> 1.4.0", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 1.0.2", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.22.2", only: :dev, runtime: false},
+      {:phoenix, "~> 1.5.4"},
+      {:phoenix_live_view, "~> 0.14.4"},
+      {:floki, "~> 0.27.0", only: :test},
+      {:phoenix_html, "~> 2.14.2"},
+      {:phoenix_live_reload, "~> 1.2.4", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.2.7"},
+      {:telemetry_metrics, "~> 0.5.0"},
+      {:telemetry_poller, "~> 0.5.1"},
+      {:gettext, "~> 0.18.1"},
+      {:jason, "~> 1.2.1"},
+      {:plug_cowboy, "~> 2.3.0"}
     ]
   end
 
