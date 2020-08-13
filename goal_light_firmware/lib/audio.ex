@@ -1,9 +1,11 @@
 defmodule GoalLightFirmware.Audio do
+  @moduledoc """
+  Handles all of the audio controls for the project
+  """
   use GenServer
-
   require Logger
 
-  def start_link(opts \\ []) do
+  def start_link(opts \\ %{}) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
@@ -12,12 +14,18 @@ defmodule GoalLightFirmware.Audio do
     Logger.info("Setting up audio")
     audio_setup()
 
-    {:ok, []}
+    {:ok, %{volume: 0}}
   end
 
   def goal, do: play("AvsGoalSong.wav")
   def intro, do: play("HereComesTheAvalancheSiren.wav")
   def win, do: play("AvsWin!.wav")
+  def powerplay, do: play("DillyDilly.wav")
+  def full_strength, do: play("PowerUp.wav")
+
+  def set_volume(volume) do
+    GenServer.cast(__MODULE__, {:set_volume, volume})
+  end
 
   def stop, do: GenServer.cast(__MODULE__, :stop)
 
@@ -36,6 +44,11 @@ defmodule GoalLightFirmware.Audio do
     {:noreply, state}
   end
 
+  def handle_cast({:set_volume, volume}, state) do
+    :os.cmd('amixer cset numid=1 #{volume}')
+    {:noreply, %{state | volume: volume}}
+  end
+
   @impl true
   def handle_cast(:stop, state) do
     Logger.info("Stopping the audio")
@@ -48,6 +61,6 @@ defmodule GoalLightFirmware.Audio do
 
   defp audio_setup do
     :os.cmd('amixer cset numid=3 1')
-    :os.cmd('amixer cset numid=1 10')
+    set_volume(100)
   end
 end
