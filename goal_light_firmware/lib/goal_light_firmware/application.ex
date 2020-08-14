@@ -39,7 +39,7 @@ defmodule GoalLightFirmware.Application do
     ]
   end
 
-  def target() do
+  def target do
     Application.get_env(:goal_light_firmware, :target)
   end
 end

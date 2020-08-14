@@ -38,21 +38,21 @@ defmodule GoalLightFirmware.Audio do
 
       full_path = Path.join(static_directory_path, file)
 
-      :os.cmd('aplay -q #{full_path}')
+      System.cmd("aplay" , ["-q", full_path])
     end)
 
     {:noreply, state}
   end
 
   def handle_cast({:set_volume, volume}, state) do
-    :os.cmd('amixer cset numid=1 #{volume}')
+    System.cmd("amixer", ["cset numid=1 #{volume}"])
     {:noreply, %{state | volume: volume}}
   end
 
   @impl true
   def handle_cast(:stop, state) do
     Logger.info("Stopping the audio")
-    :os.cmd('killall aplay')
+    System.cmd("killall", ["aplay"])
 
     {:noreply, state}
   end
@@ -60,7 +60,7 @@ defmodule GoalLightFirmware.Audio do
   defp play(file), do: GenServer.cast(__MODULE__, {:play, file})
 
   defp audio_setup do
-    :os.cmd('amixer cset numid=3 1')
+    System.cmd("amixer", ["cset numid=3 1"])
     set_volume(100)
   end
 end
