@@ -20,6 +20,7 @@ defmodule GoalLightFirmware.Application do
       ] ++ children(target())
 
     Supervisor.start_link(children, opts)
+    Nerves.Runtime.validate_firmware()
   end
 
   # List all child processes to be supervised

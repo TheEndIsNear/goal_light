@@ -38,7 +38,7 @@ defmodule GoalLightFirmware.Audio do
 
       full_path = Path.join(static_directory_path, file)
 
-      System.cmd("aplay" , ["-q", full_path])
+      System.cmd("aplay", ["-q", full_path])
     end)
 
     {:noreply, state}
