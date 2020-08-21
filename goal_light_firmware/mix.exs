@@ -74,7 +74,7 @@ defmodule GoalLightFirmware.MixProject do
       {:nerves_system_rpi2, "~> 2.0.0-rc.0", runtime: false, targets: :rpi2},
       {:nerves_system_rpi3, "~> 2.0.0-rc.0", runtime: false, targets: :rpi3},
       {:nerves_system_rpi3a, "~> 2.0.0-rc.0", runtime: false, targets: :rpi3a},
-      {:nerves_system_rpi4, "~> 2.0.0-rc.0", runtime: false, targets: :rpi4}
+      {:nerves_system_rpi4, "~> 2.0.0-rc.0", runtime: false, targets: :rpi4},
     ]
   end
 

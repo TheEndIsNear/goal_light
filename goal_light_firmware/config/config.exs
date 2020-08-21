@@ -32,6 +32,11 @@ config :nerves, source_date_epoch: "1596939562"
 
 config :nerves, rpi_v2_ack: true
 
+config :shohorn,
+  init: [:nerves_runtime, :nerves_network, :nerves_init_gadget, :nerves_time],
+  app: Mix.Project.config()[:goal_light_firmware]
+
+
 # Use Ringlogger as the logger backend and remove :console.
 # See https://hexdocs.pm/ring_logger/readme.html for more information on
 # configuring ring_logger.

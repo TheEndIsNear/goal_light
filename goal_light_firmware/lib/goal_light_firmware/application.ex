@@ -19,8 +19,8 @@ defmodule GoalLightFirmware.Application do
         GoalLightFirmware.Audio
       ] ++ children(target())
 
-    Supervisor.start_link(children, opts)
     Nerves.Runtime.validate_firmware()
+    Supervisor.start_link(children, opts)
   end
 
   # List all child processes to be supervised
