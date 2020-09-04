@@ -16,7 +16,7 @@ config :goal_light_ui, GoalLightUiWeb.Endpoint,
   load_from_system_env: false,
   # Start the server since we're running in a release instead of through `mix`
   server: true,
-  url: [host: "nerves.local", port: 80]
+  url: [host: "goal.local", port: 80]
 
 config :goal_light_firmware, target: Mix.target()
 
